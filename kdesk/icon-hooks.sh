@@ -99,58 +99,6 @@ case $icon_name in
     printf "IconStatus: {190,53} $num_file"
     ;;
 
-
-    "world")
-        IFS=$'\n'
-        # Returns if online, prints notification count and stats activity
-        info=`kano-profile-cli get_world_info`
-        apirc=$?
-
-        if [ "$debug" == "true" ]; then
-            printf "Kano Profile API returns rc=$apirc, data=\n$info\n"
-        fi
-
-        msg1="Kano World"
-        icon="/usr/share/kano-desktop/icons/kano-world-launcher.png"
-
-        # Uncomment line below to test your own notifications
-        #info="notifications_count: 18"
-
-        # Online / Offline status message
-        if [ "$apirc" == "0" ]; then
-            notification_icon="/usr/share/kano-desktop/images/world-numbers/minus.png"
-            msg2="SIGN UP"
-        else
-            # We are online, get how many notifications are on the queue and the activity stats
-            notification_icon=""
-            msg2="ONLINE"
-            for item in $info
-            do
-                eval line_item=($item)
-                case ${line_item[0]} in
-                    "notifications_count:")
-                        # Extract numbers only - Any string will become 0 which means no notifications.
-                        notifications=$(printf "%d" ${line_item[1]})
-                        if [ $notifications -lt 10 ] && [ $notifications -gt 0 ]; then
-                            notification_icon="/usr/share/kano-desktop/images/world-numbers/${notifications}.png"
-                        elif [ $notifications -gt 9 ]; then
-                            notification_icon="/usr/share/kano-desktop/images/world-numbers/9-plus.png"
-                        fi
-                        ;;
-                    "total_active_today:")
-                        msg2=$(printf "%d ONLINE" ${line_item[1]})
-                        ;;
-                esac
-            done
-        fi
-
-        # Update the icon with the values
-        printf "Icon: $icon\n"
-        printf "Message: {75,38} $msg1|$msg2\n"
-        printf "IconStatus: {30,53} $notification_icon\n"
-        ;;
-
-
     "ScreenSaverStart")
         # By default we let the screen saver kick in
         if [ "$debug" == "true" ]; then

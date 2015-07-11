@@ -1,3 +1,10 @@
+kano-desktop (2.2-1.1) UNRELEASED; urgency=low
+
+  * Non-maintainer upload.
+  * Removing tracking and social Aspects
+
+ -- Alex Averill <Alex.Averill2013@gmail.com>  Sat, 11 Jul 2015 00:19:51 -0500
+
 kano-desktop (2.2-1) unstable; urgency=low
 
   * Change the updater command that runs on Screen saver start

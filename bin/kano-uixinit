@@ -54,10 +54,10 @@ function set_keyboard
 ############ STARTS HERE ############
 
 # Track some information about the hardware used
-kano-tracker-ctl generate hw-info
+#kano-tracker-ctl generate hw-info
 
 # Start the tracking daemon
-kano-tracker-ctl refresh --watch &
+#kano-tracker-ctl refresh --watch &
 
 # Disable XServer screen saver time and screen blanking (The display would become black)
 if is_installed xset; then
@@ -112,7 +112,7 @@ logger_info "Launching LXPanel"
 /usr/bin/lxpanel --profile LXDE &
 
 # Notification widget
-/usr/bin/kano-notifications-daemon &
+#/usr/bin/kano-notifications-daemon &
 
 # LXPanel resets the volume level to 100, we need it to be restored to
 # whatever level it was before shutdown or reboot
@@ -147,25 +147,25 @@ logger_info "Launching kdesk"
 /usr/bin/kdesk &
 
 # launching desktop widgets
-/usr/bin/kano-feedback-widget &
-/usr/bin/kano-world-widget &
+#/usr/bin/kano-feedback-widget &
+#/usr/bin/kano-world-widget &
 
 
 # Report a startup event to Kano Tracker
-kano-tracker-ctl +1 startup
+#kano-tracker-ctl +1 startup
 
 # TODO: This should be in a drop in directory,
 # installed from the updater instead
-sudo kano-updater ui boot-window
+#sudo kano-updater ui boot-window
 
 if [ is_internet ]; then
     # Try uploading the tracking data to our servers
     # Should be quiet on failure
-    kano-sync --upload-tracking-data --silent
+    #kano-sync --upload-tracking-data --silent
 
     # Sync objects from the content API in the background
     # TODO: This should be removed once we have the daemon done
-    sudo kano-content sync &
+    #sudo kano-content sync &
 fi
 
 
